@@ -69,10 +69,17 @@ Build instructions
 To build using a docker container:
 * clone the repo
 * cd delaycut
-* docker run -t -i --rm -v $PWD:$PWD garthk/qt-build:bionic-5.12.0 bash
+* docker run -t -i --rm -v "$(pwd)":"$(pwd)" garthk/qt-build:bionic-5.12.0 bash
 * <inside the container>
 * apt-get update && apt-get install libgl-dev libgtk2.0-dev
 * cd <dir-of-delaycut>
 * qmake
 * make
 
+--------------------
+
+Debug instructions
+* clone the repo
+* cd delaycut
+* docker run -it --rm -v $HOME/.Xauthority:/home/dev/.Xauthority -v "$(pwd)":"$(pwd)" -e DISPLAY --network host  marcelohmariano/qt qtcreator "$(pwd)/delaycut.pro"
+* if building fails set the build output directory to delaycut_repo_dir/build and try again
